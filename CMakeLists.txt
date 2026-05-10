@@ -6,18 +6,21 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 2. Collect all source files recursively from the src directory
-file(GLOB_RECURSE LIB_SOURCES 
-    "src/*.cpp" 
+file(GLOB_RECURSE LIB_SOURCES
+    "src/*.cpp"
     "src/*.c"
 )
+
+list(FILTER LIB_SOURCES EXCLUDE REGEX ".*/src/databus/.*")
+list(FILTER LIB_SOURCES EXCLUDE REGEX ".*/src/Arduino_GFX_Library.*")
 
 # 3. Define the static library
 add_library(Arduino_GFX STATIC ${LIB_SOURCES})
 
 # 4. Set include directories
 # INTERFACE ensures that projects linking to this library also get these include paths
-target_include_directories(Arduino_GFX 
-    PUBLIC 
+target_include_directories(Arduino_GFX
+    PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
         $<INSTALL_INTERFACE:include>
 )
@@ -32,3 +35,4 @@ target_include_directories(Arduino_GFX
 # 6. Optional: Installation rules
 install(TARGETS Arduino_GFX DESTINATION lib)
 install(DIRECTORY src/ DESTINATION include FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp")
+
