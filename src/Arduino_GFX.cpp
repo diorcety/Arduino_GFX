@@ -2181,6 +2181,7 @@ void Arduino_GFX::drawChar(int16_t x, int16_t y, unsigned char c,
   }
   else // glcdfont
 #endif // defined(U8G2_FONT_SUPPORT)
+#if !defined(WITHOUT_STANDARD_FONT)
   {
     block_w = 6 * textsize_x;
     block_h = 8 * textsize_y;
@@ -2287,6 +2288,9 @@ void Arduino_GFX::drawChar(int16_t x, int16_t y, unsigned char c,
     }
     endWrite();
   }
+#else
+  {}
+#endif
 }
 
 /**************************************************************************/
