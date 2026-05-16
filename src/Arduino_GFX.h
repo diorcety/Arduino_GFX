@@ -337,6 +337,8 @@ public:
 
 #if !defined(ATTINY_CORE)
   void setFont(const GFXfont *f = NULL);
+  virtual void flush(bool force_flush = false);
+#endif // !defined(ATTINY_CORE)
 #if defined(U8G2_FONT_SUPPORT)
   void setFont(const uint8_t *font);
   void setUTF8Print(bool isEnable);
@@ -345,8 +347,6 @@ public:
   int8_t u8g2_font_decode_get_signed_bits(uint8_t cnt);
   void u8g2_font_decode_len(uint8_t len, uint8_t is_foreground, uint16_t color, uint16_t bg);
 #endif // defined(U8G2_FONT_SUPPORT)
-  virtual void flush(bool force_flush = false);
-#endif // !defined(ATTINY_CORE)
 
   // adopt from LovyanGFX
   void drawEllipse(int16_t x, int16_t y, int16_t rx, int16_t ry, uint16_t color);

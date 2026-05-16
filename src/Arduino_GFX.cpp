@@ -2600,7 +2600,9 @@ void Arduino_GFX::flush(bool force_flush)
 #if defined(U8G2_FONT_SUPPORT)
 void Arduino_GFX::setFont(const uint8_t *font)
 {
+#if !defined(ATTINY_CORE)
   gfxFont = NULL;
+#endif
   u8g2Font = (uint8_t *)font;
 
   // extract from u8g2_read_font_info()
